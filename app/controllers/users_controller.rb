@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   
   def index
     q = params[:query]
-    @users = User.all unless q User.where('(name LIKE ?) OR (employee_id LIKE ?)', "%#{q}%", "%#{q}%")
+    @users = q ? User.where('(name LIKE ?) OR (employee_id LIKE ?)', "%#{q}%", "%#{q}%") : User.all
     @users = @users.page(params[:page])
   end
 
