@@ -3,7 +3,9 @@ class UsersController < ApplicationController
   before_action :require_admin_logged_in, only: [:index]
   
   def index
-    @users = User.all.page(params[:page])
+    q = params[:query]
+    @users = User.all unless q User.where('(name LIKE ?) OR (employee_id LIKE ?)', "%#{q}%", "%#{q}%")
+    @users = @users.page(params[:page])
   end
 
   def show
