@@ -1,4 +1,9 @@
+
+
 <form class="form-inline">
+	<% if current_user.power > 0 %>
+		<button>新規</button>
+	<% end %>
 	<div class="form-group">
 		<div class="input-group">
 			<input type="text" class="form-control" placeholder="備品名、型番">
@@ -77,12 +82,12 @@
 				</td>
 				<td>
 					<% if fixture.rent_user %>
-						未定
+						<%= fixture.rental_histories.order(created_at: 'DESC').first.expected_return_at %>
 					<% end %>
 				</td>
 				<td>
 					<% if fixture.rent_user %>
-						メモ
+						<%= fixture.rental_histories.first.note %>
 					<% end %>
 				</td>
 			</tr>
