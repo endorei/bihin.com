@@ -6,15 +6,37 @@
 			<th>保管場所</th>
 			<th>状態</th>
 			<th>借りた人</th>
+			<th>所属部署</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
+		<% @fixture.all.each do |fixture| %>
+			<tr>
+				<td>
+					<%= fixture.name %>
+				</td>
+				<td>
+					<%= fixture.type_number %>
+				</td>
+				<td>
+					<%= @room.find(fixture.room).name %>
+				</td>
+				<td>
+					<% if @rentalHistory.where(fixture_id: fixture.id).order(created_at: 'DESC').first.try(:returned_at) %>
+						貸出中
+					<% else %>
+						<button class="btn btn-default">借りる</button>
+					<% end %>
+				</td>
+				<td>
+					<% if !@rentalHistory.where(fixture_id: fixture.id).order(created_at: 'DESC').first.try(:returned_at) %>
+						<%= @rentalHistory.find_by(fixture_id: fixture.id, returned_at: nil).try(:user).try(:name) %>
+					<% end %>
+				</td>
+				<td>
+					<%= fixture.name %>
+				</td>
+			</tr>
+		<% end %>
 	</tbody>
 </table>
