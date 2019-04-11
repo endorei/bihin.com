@@ -52,6 +52,6 @@ production:
   encoding: unicode
   pool: 5
   database: bihin_com_production
-  username: bihin_com
+  username: root
   password:
 
