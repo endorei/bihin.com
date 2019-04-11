@@ -10,4 +10,13 @@ Rails.application.routes.draw do
 
   get 'signup', to: 'users#new'
   resources :users, only: [:index, :show, :new, :create]
+  
+  resources :bihins do
+    collection do
+      get :management
+      get :result
+      get :mypage
+      get :member
+    end
+  end
 end
