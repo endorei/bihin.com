@@ -32,10 +32,12 @@ end
 
 10.times do
   RentalHistory.create(user: get_random_record(r, User), fixture: get_random_record(r, Fixture),
-  note: 'aaaaa', returned_at: Time.now.to_s(:db))
+    note: 'aaaaa', returned_at: Time.now.to_s(:db), expected_return_at: (Time.now + r.rand(10).days).to_s(:db))
+  
   RentalHistory.create(user: get_random_record(r, User), fixture: get_random_record(r, Fixture),
-  note: 'bbbbb', returned_at: (Time.now + r.rand(20).days).to_s(:db))
+    note: 'bbbbb', returned_at: (Time.now + r.rand(20).days).to_s(:db), expected_return_at: (Time.now + r.rand(20).days).to_s(:db))
+    
   RentalHistory.create(user: get_random_record(r, User), fixture: get_random_record(r, Fixture),
-  note: 'ccccc')
+    note: 'ccccc', expected_return_at: (Time.now + r.rand(30).days).to_s(:db))
 end
 
