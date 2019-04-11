@@ -49,14 +49,11 @@ test:
 #
 #production:
 #  <<: *default
-#  database: bihin_com_production
-#  username: bihin_com
-#  password: <%= ENV['BIHIN_COM_DATABASE_PASSWORD'] %>
 
 production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: message-board_production
-  username: message-board
-  password: <%= ENV['MESSAGE-BOARD_DATABASE_PASSWORD'] %>
+  database: bihin_com_production
+  username: bihin_com
+  password: <%= ENV['BIHIN_COM_DATABASE_PASSWORD'] %>
