@@ -31,6 +31,11 @@ end
 end
 
 10.times do
-  RentalHistory.create(user: get_random_record(r, User), fixture: get_random_record(r, Fixture), note: 'aaaaa', returned_at: Time.now.to_s(:db))
+  RentalHistory.create(user: get_random_record(r, User), fixture: get_random_record(r, Fixture),
+  note: 'aaaaa', returned_at: Time.now.to_s(:db))
+  RentalHistory.create(user: get_random_record(r, User), fixture: get_random_record(r, Fixture),
+  note: 'bbbbb', returned_at: (Time.now + r.rand(20).days).to_s(:db))
+  RentalHistory.create(user: get_random_record(r, User), fixture: get_random_record(r, Fixture),
+  note: 'ccccc')
 end
 
