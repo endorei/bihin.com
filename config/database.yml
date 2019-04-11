@@ -53,5 +53,5 @@ production:
   pool: 5
   database: bihin_com_production
   username: bihin_com
-  password: <%= ENV['BIHIN_COM_DATABASE_PASSWORD'] %>
+  password:
 
