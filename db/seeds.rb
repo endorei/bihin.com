@@ -13,8 +13,9 @@ end
 
 User.create(name: 'endo rei', email: 'endo_rei@kakaku.com', department: '開発部', password: 'hoge')
 User.create(name: 'taro', email: 'taro@kakaku.com', password: 'hoge')
+User.create(name: 'テスト', email: 'tes@kakaku.com', password: 'hoge')
 User.create(name: 'aaa', email: 'aaa@kakaku.com', password: 'hoge')
-User.create(name: 'テスト', email: 'aaa@kakaku.com', password: 'hoge')
+User.create(name: 'bbb', email: 'bbb@kakaku.com', password: 'hoge')
 
 (1..7).each do |floor|
   Room.create(name: "#{floor}階 部屋A")
