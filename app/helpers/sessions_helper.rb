@@ -6,4 +6,8 @@ module SessionsHelper
   def logged_in?
     !!current_user
   end
+  
+  def admin_logged_in?
+    logged_in? && current_user.power > 0
+  end
 end

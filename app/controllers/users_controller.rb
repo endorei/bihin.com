@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in, only: [:show]
+  before_action :require_admin_logged_in, only: [:index]
   
   def index
     @users = User.all.page(params[:page])
@@ -7,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @rental_histories = RentalHistory.where(user: @user)
   end
 
   def new
@@ -29,6 +31,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    # power は入力させない
+    params.require(:user).permit(:name, :employee_id, :email, :department, :password, :password_confirmation)
   end
 end
