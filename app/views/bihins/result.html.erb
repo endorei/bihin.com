@@ -22,19 +22,21 @@
 					<%= @room.find(fixture.room).name %>
 				</td>
 				<td>
-					<% if @rentalHistory.where(fixture_id: fixture.id).order(created_at: 'DESC').first.try(:returned_at) %>
+					<% if fixture.rent %>
 						貸出中
 					<% else %>
 						<button class="btn btn-default">借りる</button>
 					<% end %>
 				</td>
 				<td>
-					<% if !@rentalHistory.where(fixture_id: fixture.id).order(created_at: 'DESC').first.try(:returned_at) %>
-						<%= @rentalHistory.find_by(fixture_id: fixture.id, returned_at: nil).try(:user).try(:name) %>
+					<% if fixture.rent_user %>
+						<%= fixture.rent_user.name %>
 					<% end %>
 				</td>
 				<td>
-					<%= fixture.name %>
+					<% if fixture.rent_user %>
+						<%= fixture.rent_user.department %>
+					<% end %>
 				</td>
 			</tr>
 		<% end %>
