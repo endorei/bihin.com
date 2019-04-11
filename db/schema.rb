@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190411030748) do
+ActiveRecord::Schema.define(version: 20190411063818) do
 
   create_table "fixtures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -26,9 +26,10 @@ ActiveRecord::Schema.define(version: 20190411030748) do
     t.integer  "user_id"
     t.integer  "fixture_id"
     t.datetime "returned_at"
-    t.text     "note",        limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.text     "note",               limit: 65535
+    t.datetime "expected_return_at"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.index ["fixture_id"], name: "index_rental_histories_on_fixture_id", using: :btree
     t.index ["user_id"], name: "index_rental_histories_on_user_id", using: :btree
   end
@@ -44,9 +45,10 @@ ActiveRecord::Schema.define(version: 20190411030748) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "department"
-    t.integer  "power"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "power",           default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "employee_id"
   end
 
   add_foreign_key "fixtures", "rooms"

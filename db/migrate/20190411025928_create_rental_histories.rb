@@ -5,6 +5,7 @@ class CreateRentalHistories < ActiveRecord::Migration[5.0]
       t.references :fixture, foreign_key: true
       t.datetime :returned_at
       t.text :note
+      t.datetime :expected_return_at
 
       t.timestamps
     end
