@@ -12,5 +12,6 @@ class BihinsController < ApplicationController
   def mypage
   end
   def member
+    @user = User
   end
 end

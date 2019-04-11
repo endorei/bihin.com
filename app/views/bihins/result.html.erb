@@ -1,3 +1,19 @@
+
+
+<form class="form-inline">
+	<% if current_user.power > 0 %>
+		<button>新規</button>
+	<% end %>
+	<div class="form-group">
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="備品名、型番">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default">絞り込み</button>
+				</span>
+		</div>
+	</div>
+</form>
+
 <table class="table table-hover">
 	<thead>
 		<tr>
@@ -7,6 +23,8 @@
 			<th>状態</th>
 			<th>借りた人</th>
 			<th>所属部署</th>
+			<th>返却期限</th>
+			<th>備考</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,8 +43,32 @@
 					<% if fixture.rent %>
 						貸出中
 					<% else %>
-						<button class="btn btn-default">借りる</button>
+						<button class="btn btn-default" data-toggle="modal" data-target="#confirmRent">借りる</button>
 					<% end %>
+					<div class="modal fade" id="confirmRent" tabindex="-1">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+									<h4 class="modal-title">以下の備品を借ります</h4>
+								</div>
+								<div class="modal-body">
+									<div>
+										<b>品名：</b> <%= fixture.name %>
+										<b>型番：</b> <%= fixture.type_number %>
+									</div>
+									<div class="form-group">
+										<label for="rentMemo">備考</label>
+										<textarea class="form-control" id="rentMemo" placeholder="会議で使用します。等"></textarea>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+									<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</td>
 				<td>
 					<% if fixture.rent_user %>
@@ -38,7 +80,18 @@
 						<%= fixture.rent_user.department %>
 					<% end %>
 				</td>
+				<td>
+					<% if fixture.rent_user %>
+						<%= fixture.rental_histories.order(created_at: 'DESC').first.expected_return_at %>
+					<% end %>
+				</td>
+				<td>
+					<% if fixture.rent_user %>
+						<%= fixture.rental_histories.first.note %>
+					<% end %>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
+
