@@ -11,11 +11,11 @@ def get_random_record(r, model)
   return model.find(r.rand(model.count) + 1)
 end
 
-User.create(name: 'endo rei', email: 'endo_rei@kakaku.com', department: '開発部', password: 'hoge')
-User.create(name: 'taro', email: 'taro@kakaku.com', password: 'hoge')
-User.create(name: 'テスト', email: 'tes@kakaku.com', password: 'hoge')
-User.create(name: 'aaa', email: 'aaa@kakaku.com', password: 'hoge')
-User.create(name: 'bbb', email: 'bbb@kakaku.com', password: 'hoge')
+User.create(name: 'endo rei', employee_id: 'xxx', email: 'endo_rei@kakaku.com', department: '開発部', password: 'hoge', power: 1)
+User.create(name: 'taro', employee_id: 'yyy', email: 'taro@kakaku.com', password: 'hoge', power: 1)
+User.create(name: 'テスト', employee_id: 'zzz', email: 'tes@kakaku.com', password: 'hoge', power: 1)
+User.create(name: 'aaa', employee_id: '111', email: 'aaa@kakaku.com', password: 'hoge', power: 0)
+User.create(name: 'bbb', employee_id: '222', email: 'bbb@kakaku.com', password: 'hoge')
 
 (1..7).each do |floor|
   Room.create(name: "#{floor}階 部屋A")
