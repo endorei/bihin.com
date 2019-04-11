@@ -14,4 +14,8 @@ class BihinsController < ApplicationController
   def member
     @user = User
   end
+  
+  def search
+    
+  end
 end

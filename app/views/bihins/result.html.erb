@@ -1,22 +1,63 @@
-
-
-<form class="form-inline">
-	<% if current_user.power > 0 %>
-		<button>新規</button>
-	<% end %>
-	<div class="form-group">
-		<div class="input-group">
-			<input type="text" class="form-control" placeholder="備品名、型番">
-				<span class="input-group-btn">
-					<button type="button" class="btn btn-default">絞り込み</button>
-				</span>
+<% if current_user.power > 0 %>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			備品を追加
+		</div>
+		<div class="panel-body">
+			<form class="form-inline" id="addBihinForm">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="品名">
+					<input type="text" class="form-control" placeholder="型番">
+					<input type="text" class="form-control" placeholder="保管場所">
+					<button class="btn btn-primary">登録</button>
+				</div>
+			</form>
 		</div>
 	</div>
+<% end %>
+<form class="form-inline">
+	<div class="form-group">
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="備品名、型番、階層、部屋名">
+			<span class="input-group-btn">
+				<%#= button_to "絞り込み", {controller: 'bihins', action: 'search'}, {method: :get, class: "btn btn-default"} %>
+				<button type="button" class="btn btn-default">絞り込み</button>
+			</span>
+		</div>
+	</div>
+		<% if current_user.power > 0 %>
+			<button type="button" class="btn btn-danger pull-right" id="bihinDeleteBtn" data-toggle="modal" data-target="#bihinDeleteModal">削除</button>
+			<%#= button_to "削除", {controller: 'bihins', action: 'result'}, {method: :get, class: "btn btn-danger pull-right",id: "bihinDeleteBtn",data-toggle: "modal",data-target: "#bihinDeleteModal"} %>
+			<button type="button" class="btn btn-default pull-right">編集</button>
+			<%#= button_to "編集", {controller: 'bihins', action: 'result'}, {method: :get, class: "btn btn-default pull-right"} %>
+			
+			<div class="modal fade" id="bihinDeleteModal" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+							<h4 class="modal-title">選択した備品を削除します。</h4>
+						</div>
+						<div class="modal-body">
+							
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+							<button type="button" class="btn btn-danger">削除</button>
+						</div>
+					</div>
+				</div>
+			</div>
+	<% end %>
 </form>
 
-<table class="table table-hover">
+
+<table class="table table-hover table-bordered">
 	<thead>
 		<tr>
+		<% if current_user.power > 0 %>
+			<th>選択</th>
+		<% end %>
 			<th>品名</th>
 			<th>型番</th>
 			<th>保管場所</th>
@@ -29,7 +70,16 @@
 	</thead>
 	<tbody>
 		<% @fixture.all.each do |fixture| %>
-			<tr>
+		<% if fixture.rent %>
+			<tr class="danger">
+		<% else %>
+			<tr class="success">
+		<% end %>
+			<% if current_user.power > 0 %>
+				<td>
+					<input id=<%= "checkboxNumber" + fixture.id.to_s %> type="checkbox">
+				</td>
+			<% end %>
 				<td>
 					<%= fixture.name %>
 				</td>
@@ -43,9 +93,9 @@
 					<% if fixture.rent %>
 						貸出中
 					<% else %>
-						<button class="btn btn-default" data-toggle="modal" data-target="#confirmRent">借りる</button>
+						<button class="btn btn-success" data-toggle="modal" data-target=<%= "#confirmRent" + fixture.id.to_s %>>借りる</button>
 					<% end %>
-					<div class="modal fade" id="confirmRent" tabindex="-1">
+					<div class="modal fade" id=<%= "confirmRent" + fixture.id.to_s %> tabindex="-1">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -54,9 +104,16 @@
 								</div>
 								<div class="modal-body">
 									<div>
-										<b>品名：</b> <%= fixture.name %>
-										<b>型番：</b> <%= fixture.type_number %>
+										<b>品名：</b> <%= fixture.name %><br>
+										<b>型番：</b> <%= fixture.type_number %><br>
+										<b>保管場所：</b> <%= fixture.room.name %>
 									</div>
+									<form class="form-inline" id="addBihinForm">
+										<div class="form-group">
+											<label for="expectedReturnAt">返却期限：</label>
+											<input type="text" class="form-control" id="expectedReturnAt" placeholder="2019-04-15">
+										</div>
+									</form>
 									<div class="form-group">
 										<label for="rentMemo">備考</label>
 										<textarea class="form-control" id="rentMemo" placeholder="会議で使用します。等"></textarea>
@@ -87,7 +144,7 @@
 				</td>
 				<td>
 					<% if fixture.rent_user %>
-						<%= fixture.rental_histories.first.note %>
+						<%= fixture.rental_histories.order(created_at: 'DESC').first.note %>
 					<% end %>
 				</td>
 			</tr>
