@@ -10,14 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190410070158) do
+ActiveRecord::Schema.define(version: 20190411030748) do
+
+  create_table "fixtures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.text     "type_number", limit: 65535
+    t.integer  "room_id"
+    t.text     "note",        limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["room_id"], name: "index_fixtures_on_room_id", using: :btree
+  end
+
+  create_table "rental_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "fixture_id"
+    t.datetime "returned_at"
+    t.text     "note",        limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["fixture_id"], name: "index_rental_histories_on_fixture_id", using: :btree
+    t.index ["user_id"], name: "index_rental_histories_on_user_id", using: :btree
+  end
+
+  create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text     "note",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
+    t.string   "department"
+    t.integer  "power"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "fixtures", "rooms"
+  add_foreign_key "rental_histories", "fixtures"
+  add_foreign_key "rental_histories", "users"
 end
