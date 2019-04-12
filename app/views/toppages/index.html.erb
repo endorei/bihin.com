@@ -1,9 +1,18 @@
-<% if logged_in? %>
-
-  <p>ログイン完了ユーザ: 
-<%= current_user.name %>
-</p>
+<% if admin_logged_in? %>
+  <div class="jumbotron">
+  	<a href="#"><%= image_tag 'bihin-img.png', :size => '400x400', class:'img-circle' %></a>
+      <a href="#"><%= image_tag 'member-img.png', :size => '400x400', class:'img-circle' %></a>
+  </div>
 <% else %>
+  <!--<h1 class="text-center">Bihin.com</h1>-->
+  <%= image_tag 'logo.png', :size => '375x116', class:'img-responsive center-block' %>
+  <form>
+      <div class="row">
+          <div class="col-xs-8 col-xs-offset-2">
+               <input type="text" class="form-control" placeholder="備品名、型番">
+          </div>
+      </div>
+  </form>
 
   <div class="center jumbotron">
     <div class="text-center">

@@ -1,1 +1,66 @@
-<%= render 'users', users: @users %>
+<form class="form-inline">
+	<div class="form-group">
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="名前、社員番号">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default">絞り込み</button>
+				</span>
+		</div>
+	</div>
+	<button type="button" class="btn btn-danger pull-right" id="memberDeleteBtn" data-toggle="modal" data-target="#memberDeleteModal">削除</button>
+	<div class="modal fade" id="memberDeleteModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+					<h4 class="modal-title">選択した社員を削除します。</h4>
+				</div>
+				<div class="modal-body">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+					<button type="button" class="btn btn-danger">削除</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<table class="table table-hover table-bordered">
+	<thead>
+		<tr>
+			<th>選択</th>
+			<th>名前</th>
+			<th>社員番号</th>
+			<th>所属</th>
+			<th>メールアドレス</th>
+			<th>借りている物</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+			<tr>
+				<td>
+					<input id=<%= "checkboxNumber" + user.id.to_s %> type="checkbox">
+				</td>
+				<td>
+					<%= user.name %>
+				</td>
+				<td>
+					<%= user.employee_id %>
+				</td>
+				<td>
+					<%= user.department %>
+				</td>
+				<td>
+					<%= user.email %>
+				</td>
+				<td>
+					
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+

@@ -1,8 +1,13 @@
-class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+class FixturesController < ApplicationController
+  before_action :require_admin_logged_in, only: [:create]
   
   def index
     @fixtures = Fixture.all.page(params[:page])
+    
+    @fixture = Fixture
+    @room = Room
+    @user = User
+    @rentalHistory = RentalHistory
   end
 
   def create
