@@ -20,13 +20,15 @@
 		</div>
 	</div>
 <% end %>
+
+
 <%#= link_to 'test', test_fixtures_path, remote: true, class: 'btn btn-primary' %>
 <!--<div id="test"></div>-->
-<form class="form-inline">
+<div class="form-inline">
 	<div class="form-group">
 		<div class="input-group">
 			<%= form_tag(fixtures_path,:method => 'get') do %>
-			  <%= text_field_tag :query, '', class: "form-control", placeholder: "備品名、型番" %>
+			  <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "備品名、型番" %>
 			  <span class="input-group-btn">
 			  <%= submit_tag 'Search', :name => nil, class: "btn btn-default" %>
 			  </span>
@@ -39,8 +41,62 @@
 			<!--<button type="button" class="btn btn-danger pull-right" id="bihinDeleteBtn" data-toggle="modal" data-target="#bihinDeleteModal">削除</button>-->
 			<%#= link_to '削除', fixtures_path, remote: true, class: 'btn btn-danger pull-right', id: 'bihinDeleteBtn', data-toggle: "modal", data-target: '#bihinDeleteModal' %>
 			<%#= button_to "削除", {controller: 'bihins', action: 'result'}, {method: :get, class: "btn btn-danger pull-right",id: "bihinDeleteBtn",data-toggle: "modal",data-target: "#bihinDeleteModal"} %>
-			<%#= button_to "編集", {controller: 'bihins', action: 'result'}, {method: :get, class: "btn btn-default pull-right"} %>
+
+			<button type="button" class="btn btn-default pull-right" id="bihinEditBtn" data-toggle="modal" data-target="#ListEdit">編集</button>
+			<%#= button_to "編集", {controller: 'bihins', action: 'result'}, {method: :get, class: "btn btn-default pull-right",id: "bihinEditBtn", data-toggle: "modal",data-target: "#ListEdit"} %>
 			
+			<div class="modal fade" id= "ListEdit" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+							<h4 class="modal-title">選択した備品を編集します。</h4>
+						</div>
+						
+						<div class="modal-body">
+							<div>
+								<form class="form-inline" id="addBihinForm">
+									<div class="form-group">
+										<label for="expectedReturnAt">品名：</label>
+										<input type="text" class="form-control" id="bihinname" placeholder="品名を入力">
+									</div>
+								</form>
+
+								<form class="form-inline" id="addBihinForm">
+									<div class="form-group">
+										<label for="expectedReturnAt">型番：</label>
+										<input type="text" class="form-control" id="kataban" placeholder="型番を入力">
+									</div>
+								</form>
+
+								<form class="form-inline" id="addBihinForm">
+									<div class="form-group">
+										<label for="expectedReturnAt">保管場所：</label>
+										<input type="text" class="form-control" id="place" placeholder="保管場所を入力">
+									</div>
+								</form>
+
+								<form class="form-inline" id="addBihinForm">
+									<div class="form-group">
+										<label for="expectedReturnAt">貸出状況：</label>
+										<input type="text" class="form-control" id="rental_situation" placeholder="貸出中 or 空き">
+									</div>
+								</form>
+							</div>
+								<div class="form-group">
+									<label for="rentMemo">備考</label>
+									<textarea class="form-control" id="rentMemo" placeholder="会議で使用します。等"></textarea>
+								</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+							<button type="button" class="btn btn-primary">変更</button>
+						</div>
+					</div>
+				</div>
+			</div>
+					
 			<div class="modal fade" id="bihinDeleteModal" tabindex="-1">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -49,8 +105,9 @@
 							<h4 class="modal-title">選択した備品を削除します。</h4>
 						</div>
 						<div class="modal-body">
-							
+
 						</div>
+
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
 							<button type="button" class="btn btn-danger">削除</button>
@@ -59,7 +116,7 @@
 				</div>
 			</div>
 	<% end %>
-</form>
+</div>
 
 <%= form_for @fixture, url: delete_all_fixtures_path, method: :post  do |f|%>
 
@@ -124,16 +181,24 @@
 										<b>型番：</b> <%= fixture.type_number %><br>
 										<b>保管場所：</b> <%= fixture.room.name %>
 									</div>
-									<form class="form-inline" id="addBihinForm">
-										<div class="form-group">
-											<label for="expectedReturnAt">返却期限：</label>
-											<input type="text" class="form-control" id="expectedReturnAt" placeholder="2019-04-15">
-										</div>
-									</form>
-									<div class="form-group">
-										<label for="rentMemo">備考</label>
-										<textarea class="form-control" id="rentMemo" placeholder="会議で使用します。等"></textarea>
-									</div>
+									
+									<%= form_for(@rental_history) do |f| %>
+							      
+							      
+							      <%= hidden_field_tag :user, current_user %>
+							      <%= hidden_field_tag :fixture, fixture %>
+							      
+							      <div class="form-group">
+											<%= f.label :expected_return_at, '返却期限：' %>
+											<%= f.text_field :expected_return_at, class: 'form-control', placeholder: "2019-04-15" %>
+							      </div>
+							      <div class="form-group">
+											<%= f.label :note, '備考' %>
+											<%= f.text_field :note, class: 'form-control', placeholder: "会議で使用します。等" %>
+							      </div>
+										<%= f.submit '借りる', class: 'btn btn-primary btn-block' %>
+									<% end %>
+									
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
