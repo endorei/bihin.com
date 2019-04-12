@@ -4,7 +4,7 @@ class FixturesController < ApplicationController
   def index
     q = params[:query]
     @fixtures = q ? Fixture.where('(name LIKE ?) OR (type_number LIKE ?)', "%#{q}%", "%#{q}%") : Fixture.all
-    @fixtures = @fixtures.page(params[:page]).per(20)
+    @fixtures = @fixtures.order(created_at: 'DESC').page(params[:page]).per(20)
     
     @fixture = Fixture.new
     @rental_history = RentalHistory.new
