@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user = Message.find(params[:id])
+    @user = User.find(params[:id])
     @user.destroy
 
     flash[:success] = 'ユーザーは正常に削除されました'
