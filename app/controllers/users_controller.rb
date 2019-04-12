@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def index
     q = params[:query]
     @users = q ? User.where('(name LIKE ?) OR (employee_id LIKE ?)', "%#{q}%", "%#{q}%") : User.all
-    @users = @users.page(params[:page])
+    @users = @users.page(params[:page]).per(20)
   end
 
   def show
@@ -29,6 +29,25 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      flash[:success] = 'ユーザー情報は正常に更新されました'
+      redirect_to @user
+    else
+      flash[:danger] = 'ユーザー情報は更新されませんでした'
+      redirect_to @user
+    end
+  end
+  
+  def destroy
+    @user = Message.find(params[:id])
+    @user.destroy
+
+    flash[:success] = 'ユーザーは正常に削除されました'
+    redirect_to root_path
+  end
 
   private
 
