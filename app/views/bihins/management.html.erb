@@ -6,7 +6,10 @@
 <!--<img src="..." alt="..." class"img-circle">-->
 <!--<img src="../img/sample-256x256.png" class="img-circle" alt="サンプル画像">-->
 <div class="jumbotron">
-	<a href="#"><%= image_tag 'bihin-img.png', :size => '400x400', class:'img-circle' %></a>
-    <a href="#"><%= image_tag 'member-img.png', :size => '400x400', class:'img-circle' %></a>
+	<%= link_to image_tag('bihin-img.png', :size => '400x400', class:'img-circle'),users_path %>
+	<p>
+	    <%= link_to 'bihin-img.png',users_path %>
+	</p>
+    <a href="/users"><%= image_tag 'member-img.png', :size => '400x400', class:'img-circle' %></a>
 </div>
 
