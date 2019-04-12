@@ -41,8 +41,62 @@
 			<!--<button type="button" class="btn btn-danger pull-right" id="bihinDeleteBtn" data-toggle="modal" data-target="#bihinDeleteModal">削除</button>-->
 			<%#= link_to '削除', fixtures_path, remote: true, class: 'btn btn-danger pull-right', id: 'bihinDeleteBtn', data-toggle: "modal", data-target: '#bihinDeleteModal' %>
 			<%#= button_to "削除", {controller: 'bihins', action: 'result'}, {method: :get, class: "btn btn-danger pull-right",id: "bihinDeleteBtn",data-toggle: "modal",data-target: "#bihinDeleteModal"} %>
-			<%#= button_to "編集", {controller: 'bihins', action: 'result'}, {method: :get, class: "btn btn-default pull-right"} %>
+
+			<button type="button" class="btn btn-default pull-right" id="bihinEditBtn" data-toggle="modal" data-target="#ListEdit">編集</button>
+			<%#= button_to "編集", {controller: 'bihins', action: 'result'}, {method: :get, class: "btn btn-default pull-right",id: "bihinEditBtn", data-toggle: "modal",data-target: "#ListEdit"} %>
 			
+			<div class="modal fade" id= "ListEdit" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+							<h4 class="modal-title">選択した備品を編集します。</h4>
+						</div>
+						
+						<div class="modal-body">
+							<div>
+								<form class="form-inline" id="addBihinForm">
+									<div class="form-group">
+										<label for="expectedReturnAt">品名：</label>
+										<input type="text" class="form-control" id="bihinname" placeholder="品名を入力">
+									</div>
+								</form>
+
+								<form class="form-inline" id="addBihinForm">
+									<div class="form-group">
+										<label for="expectedReturnAt">型番：</label>
+										<input type="text" class="form-control" id="kataban" placeholder="型番を入力">
+									</div>
+								</form>
+
+								<form class="form-inline" id="addBihinForm">
+									<div class="form-group">
+										<label for="expectedReturnAt">保管場所：</label>
+										<input type="text" class="form-control" id="place" placeholder="保管場所を入力">
+									</div>
+								</form>
+
+								<form class="form-inline" id="addBihinForm">
+									<div class="form-group">
+										<label for="expectedReturnAt">貸出状況：</label>
+										<input type="text" class="form-control" id="rental_situation" placeholder="貸出中 or 空き">
+									</div>
+								</form>
+							</div>
+								<div class="form-group">
+									<label for="rentMemo">備考</label>
+									<textarea class="form-control" id="rentMemo" placeholder="会議で使用します。等"></textarea>
+								</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+							<button type="button" class="btn btn-primary">変更</button>
+						</div>
+					</div>
+				</div>
+			</div>
+					
 			<div class="modal fade" id="bihinDeleteModal" tabindex="-1">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -51,8 +105,9 @@
 							<h4 class="modal-title">選択した備品を削除します。</h4>
 						</div>
 						<div class="modal-body">
-							
+
 						</div>
+
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
 							<button type="button" class="btn btn-danger">削除</button>
