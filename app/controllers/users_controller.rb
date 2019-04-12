@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def index
     q = params[:query]
     @users = q ? User.where('(name LIKE ?) OR (employee_id LIKE ?)', "%#{q}%", "%#{q}%") : User.all
-    @users = @users.page(params[:page])
+    @users = @users.page(params[:page]).per(20)
   end
 
   def show
