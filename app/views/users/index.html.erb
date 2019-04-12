@@ -1,10 +1,12 @@
 <form class="form-inline">
 	<div class="form-group">
 		<div class="input-group">
-			<input type="text" class="form-control" placeholder="名前、社員番号">
-				<span class="input-group-btn">
-					<button type="button" class="btn btn-default">絞り込み</button>
-				</span>
+			<%= form_tag(users_path,:method => 'get') do %>
+			  <%= text_field_tag :query, '', class: "form-control", placeholder: "名前、社員番号" %>
+			  <span class="input-group-btn">
+			  <%= submit_tag 'Search', :name => nil, class: "btn btn-default" %>
+			  </span>
+			<% end %>
 		</div>
 	</div>
 	<button type="button" class="btn btn-danger pull-right" id="memberDeleteBtn" data-toggle="modal" data-target="#memberDeleteModal">削除</button>
@@ -63,4 +65,5 @@
 		<% end %>
 	</tbody>
 </table>
+<%= paginate @users %>
 

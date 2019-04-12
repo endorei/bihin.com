@@ -2,7 +2,9 @@ class FixturesController < ApplicationController
   before_action :require_admin_logged_in, only: [:create]
   
   def index
-    @fixtures = Fixture.all.page(params[:page])
+    q = params[:query]
+    @fixtures = q ? Fixture.where('(name LIKE ?) OR (type_number LIKE ?)', "%#{q}%", "%#{q}%") : Fixture.all
+    @fixtures = @fixtures.page(params[:page]).per(20)
     
     @fixture = Fixture.new
   end

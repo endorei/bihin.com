@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post 'reset_password', to: 'sessions#reset_password'
 
   get 'signup', to: 'users#new'
-  resources :users, only: [:index, :show, :new, :create]
+  resources :users, only: [:index, :show, :new, :create, :update, :destroy]
   
   resources :fixtures, only: [:index, :create] do
     collection do
