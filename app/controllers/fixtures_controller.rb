@@ -24,6 +24,23 @@ class FixturesController < ApplicationController
   def test
     
   end
+  
+  def destroy
+    @fixture = Fixture.find(params[:id])
+    @fixture.destroy
+
+    flash[:success] = '備品は正常に削除されました'
+    redirect_to fixtures_path
+  end
+  
+  def delete_all
+    params[:fixture][:id].each do |id|
+      fixture = Fixture.find_by(id: id) if id != 0 && id != "0"
+      fixture.destroy if fixture.present?
+    end
+    
+      redirect_to action: 'index'
+  end
 
   private
 
