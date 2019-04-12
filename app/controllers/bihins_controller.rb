@@ -16,6 +16,15 @@ class BihinsController < ApplicationController
   end
   
   def search
-    
+    #Viewのformで取得したパラメータをモデルに渡す
+#    @bihins = Bihin.search(params[:search])
+#    def self.search(search)
+#      if search
+#        Post.where(['content LIKE ?', "%#{search}%"])
+#      else
+#        Post.all
+#      end
+#    end
+#    puts params[:search]
   end
 end
