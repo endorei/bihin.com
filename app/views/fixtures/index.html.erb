@@ -19,7 +19,7 @@
 	<div class="form-group">
 		<div class="input-group">
 			<%= form_tag(fixtures_path,:method => 'get') do %>
-			  <%= text_field_tag :query, '', class: "form-control", placeholder: "備品名、型番" %>
+			  <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "備品名、型番" %>
 			  <span class="input-group-btn">
 			  <%= submit_tag 'Search', :name => nil, class: "btn btn-default" %>
 			  </span>
