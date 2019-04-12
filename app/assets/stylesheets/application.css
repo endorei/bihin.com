@@ -38,6 +38,14 @@
   opacity: .5;
 }
 
+#memberBtn {
+  margin-left: 64px;
+}
+
+#signUp {
+  margin-top: 50px;
+  margin-left: 100px;
+}
 /*body {*/
 /*  background-color: #e0f2f1;*/
 /*}*/
