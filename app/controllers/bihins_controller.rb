@@ -15,7 +15,6 @@ class BihinsController < ApplicationController
     @user = User
   end
   
-  def search
-    
+  def add_bihin
   end
 end

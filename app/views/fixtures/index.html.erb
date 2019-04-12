@@ -4,17 +4,25 @@
 			備品を追加
 		</div>
 		<div class="panel-body">
-			<form class="form-inline" id="addBihinForm">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="品名">
-					<input type="text" class="form-control" placeholder="型番">
-					<input type="text" class="form-control" placeholder="保管場所">
-					<button class="btn btn-primary">登録</button>
+					<%= form_for @fixture, :html => {:class => 'form-inline'} do |f| %>
+						<%= f.text_field :name, class: 'form-control', placeholder: '品名' %>
+						<%= f.text_field :type_number, class: 'form-control', placeholder: '型番' %>
+						<%= f.collection_select :room_id, Room.all, :id, :name, {prompt: ""}, {class: "form-control input-sm"} %>
+						<%= f.text_field :note, class: 'form-control', placeholder: '備考（例：故障中、等）' %>
+						<%= f.submit '登録', class: 'btn btn-primary' %>
+					<% end %>
+					<!--<input type="text" class="form-control" placeholder="品名">-->
+					<!--<input type="text" class="form-control" placeholder="型番">-->
+					<!--<input type="text" class="form-control" placeholder="保管場所">-->
+					<!--<button class="btn btn-primary">登録</button>-->
 				</div>
-			</form>
 		</div>
 	</div>
 <% end %>
+
+<%#= link_to 'test', test_fixtures_path, remote: true, class: 'btn btn-primary' %>
+<!--<div id="test"></div>-->
 <div class="form-inline">
 	<div class="form-group">
 		<div class="input-group">
@@ -89,7 +97,7 @@
 					<%= fixture.type_number %>
 				</td>
 				<td>
-					<%= @room.find(fixture.room).name %>
+					<%= Room.find(fixture.room).name %>
 				</td>
 				<td>
 					<% if fixture.rent %>
