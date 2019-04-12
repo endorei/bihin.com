@@ -1,15 +1,15 @@
 <% if admin_logged_in? %>
   <div class="jumbotron">
     	<%= link_to image_tag('bihin-img.png', :size => '400x400', class:'img-circle'),fixtures_path %>
-    	<%= link_to image_tag('member-img.png', :size => '400x400', class:'img-circle'),users_path %>
+    	<%= link_to image_tag('member-img.png', :size => '400x400', class:'img-circle', id: 'memberBtn'),users_path %>
   </div>
 <% else %>
   <!--<h1 class="text-center">Bihin.com</h1>-->
   <%= image_tag 'logo.png', :size => '375x116', class:'img-responsive center-block' %>
   
       <div class="row">
-          <div class="col-xs-8 col-xs-offset-2">
-            <div class="form-inline">
+          <div class="col-xs-8 col-xs-offset-4">
+                    <div class="form-inline">
               <div class="form-group">
             		<div class="input-group">
             			<%= form_tag(fixtures_path,:method => 'get') do %>
@@ -21,10 +21,12 @@
             		</div>
             	</div>
             </div>
+            <div class="center-block">
+              <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary', id: 'signUp' %>
+            </div>
           </div>
       </div>
-  
-<%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+
 
   </div>
 <% end %>
