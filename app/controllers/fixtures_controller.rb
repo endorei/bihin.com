@@ -4,10 +4,7 @@ class FixturesController < ApplicationController
   def index
     @fixtures = Fixture.all.page(params[:page])
     
-    @fixture = Fixture
-    @room = Room
-    @user = User
-    @rentalHistory = RentalHistory
+    @fixture = Fixture.new
   end
 
   def create
@@ -15,17 +12,20 @@ class FixturesController < ApplicationController
 
     if @fixture.save
       flash.now[:success] = '備品を登録しました。'
-      render :index
+      redirect_to action: 'index'
     else
       flash.now[:danger] = '備品の登録に失敗しました。'
       render :index
     end
   end
 
+  def test
+    
+  end
 
   private
 
   def fixture_params
-    params.require(:fixture).permit(:name, :type_number, :room, :note)
+    params.require(:fixture).permit(:name, :type_number, :note, :room_id)
   end
 end

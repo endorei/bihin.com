@@ -14,36 +14,8 @@
  *= require_self
  */
  
-/*#addBihinForm {*/
-/*  margin-bottom: 0.5em;*/
-/*}*/
-
-input[type=checkbox] {
-  transform: scale(2);
-}
-
-#bihinDeleteBtn {
-  margin-left: 0.5em;
-}
-
-.img-circle {
-  border: solid 16px #050;
-}
-
-/*.jumbotron h1 {*/
-/*  text-align: center;*/
-/*}*/
-
-.jumbotron img {
-  /*-webkit-transform: rotate(15deg) scale(1.4);*/
-  /*transform: rotate(15deg) scale(1.4);*/
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
-}
-.jumbotron img:hover {
-  -webkit-transform: rotate(10deg) scale(1.05);
-  transform: rotate(10deg) scale(1.05);
-  opacity: .5;
+#addBihinForm {
+  margin-bottom: 0.5em;
 }
  
 /* .bihin-btn a{*/
