@@ -18,13 +18,15 @@
 <form class="form-inline">
 	<div class="form-group">
 		<div class="input-group">
-			<input type="text" class="form-control" placeholder="備品名、型番、階層、部屋名">
-			<span class="input-group-btn">
-				<%#= button_to "絞り込み", {controller: 'bihins', action: 'search'}, {method: :get, class: "btn btn-default"} %>
-				<button type="button" class="btn btn-default">絞り込み</button>
-			</span>
+			<%= form_tag(users_path,:method => 'get') do %>
+			  <%= text_field_tag :query, '', class: "form-control", placeholder: "備品名、型番" %>
+			  <span class="input-group-btn">
+			  <%= submit_tag 'Search', :name => nil, class: "btn btn-default" %>
+			  </span>
+			<% end %>
 		</div>
 	</div>
+	
 		<% if admin_logged_in? %>
 			<button type="button" class="btn btn-danger pull-right" id="bihinDeleteBtn" data-toggle="modal" data-target="#bihinDeleteModal">削除</button>
 			<%#= button_to "削除", {controller: 'bihins', action: 'result'}, {method: :get, class: "btn btn-danger pull-right",id: "bihinDeleteBtn",data-toggle: "modal",data-target: "#bihinDeleteModal"} %>
@@ -69,7 +71,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% @fixture.all.each do |fixture| %>
+		<% @fixtures.each do |fixture| %>
 		<% if fixture.rent %>
 			<tr class="danger">
 		<% else %>
