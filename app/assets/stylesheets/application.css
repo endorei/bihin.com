@@ -14,16 +14,8 @@
  *= require_self
  */
  
-/*#addBihinForm {*/
-/*  margin-bottom: 0.5em;*/
-/*}*/
-
-input[type=checkbox] {
-  transform: scale(2);
-}
-
-#bihinDeleteBtn {
-  margin-left: 0.5em;
+#addBihinForm {
+  margin-bottom: 0.5em;
 }
 
 .img-circle {
@@ -45,10 +37,10 @@ input[type=checkbox] {
   transform: rotate(10deg) scale(1.05);
   opacity: .5;
 }
- 
-/* .bihin-btn a{*/
-/*     text-decoration: none;*/
-/* }*/
+
+/*body {*/
+/*  background-color: #e0f2f1;*/
+/*}*/
  
 /* .bihin-btn {*/
 /*  display: inline-block;*/
@@ -73,15 +65,15 @@ input[type=checkbox] {
 /*  box-shadow: 0px 0px 0px 5px #8cd460;*/
 /*}*/
 
-/* navbar 全体の背景色とボーダーカラー */
-/*.navbar-inverse {*/
-/*background-color: #65baad;*/
-/*border-color: #3e6962;*/
-/*}*/
+ /*navbar 全体の背景色とボーダーカラー */
+.navbar-inverse {
+background-color: #00897b;
+border-color: #3e6962;
+}
 /* navbar テキストカラー */
-/*.navbar-inverse .navbar-nav > li > a {*/
-/*color: #ffffff;*/
-/*}*/
+.navbar-inverse .navbar-nav > li > a {
+  color: #a7ffeb;
+}
 /* navbar hover,focus時のテキストカラー */
 /*.navbar-inverse .navbar-nav > li > a:hover,*/
 /*.navbar-inverse .navbar-nav > li > a:focus {*/
