@@ -17,10 +17,30 @@
 #addBihinForm {
   margin-bottom: 0.5em;
 }
- 
-/* .bihin-btn a{*/
-/*     text-decoration: none;*/
-/* }*/
+
+.img-circle {
+  border: solid 16px #050;
+}
+
+/*.jumbotron h1 {*/
+/*  text-align: center;*/
+/*}*/
+
+.jumbotron img {
+  /*-webkit-transform: rotate(15deg) scale(1.4);*/
+  /*transform: rotate(15deg) scale(1.4);*/
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+.jumbotron img:hover {
+  -webkit-transform: rotate(10deg) scale(1.05);
+  transform: rotate(10deg) scale(1.05);
+  opacity: .5;
+}
+
+/*body {*/
+/*  background-color: #e0f2f1;*/
+/*}*/
  
 /* .bihin-btn {*/
 /*  display: inline-block;*/
@@ -45,15 +65,15 @@
 /*  box-shadow: 0px 0px 0px 5px #8cd460;*/
 /*}*/
 
-/* navbar 全体の背景色とボーダーカラー */
-/*.navbar-inverse {*/
-/*background-color: #65baad;*/
-/*border-color: #3e6962;*/
-/*}*/
+ /*navbar 全体の背景色とボーダーカラー */
+.navbar-inverse {
+background-color: #00897b;
+border-color: #3e6962;
+}
 /* navbar テキストカラー */
-/*.navbar-inverse .navbar-nav > li > a {*/
-/*color: #ffffff;*/
-/*}*/
+.navbar-inverse .navbar-nav > li > a {
+  color: #a7ffeb;
+}
 /* navbar hover,focus時のテキストカラー */
 /*.navbar-inverse .navbar-nav > li > a:hover,*/
 /*.navbar-inverse .navbar-nav > li > a:focus {*/
