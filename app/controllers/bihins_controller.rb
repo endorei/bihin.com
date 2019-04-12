@@ -15,6 +15,5 @@ class BihinsController < ApplicationController
     @user = User
   end
   
-  def add_bihin
   end
 end
