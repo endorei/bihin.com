@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   resources :users, only: [:index, :show, :new, :create, :update, :destroy]
   
-  resources :fixtures, only: [:index, :create]
+  resources :fixtures, only: [:index, :create] do
+    collection do
+      get :test
+    end
+  end
   
   resources :bihins do
     collection do
