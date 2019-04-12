@@ -119,16 +119,24 @@
 										<b>型番：</b> <%= fixture.type_number %><br>
 										<b>保管場所：</b> <%= fixture.room.name %>
 									</div>
-									<form class="form-inline" id="addBihinForm">
-										<div class="form-group">
-											<label for="expectedReturnAt">返却期限：</label>
-											<input type="text" class="form-control" id="expectedReturnAt" placeholder="2019-04-15">
-										</div>
-									</form>
-									<div class="form-group">
-										<label for="rentMemo">備考</label>
-										<textarea class="form-control" id="rentMemo" placeholder="会議で使用します。等"></textarea>
-									</div>
+									
+									<%= form_for(@rental_history) do |f| %>
+							      
+							      
+							      <%= hidden_field_tag :user, current_user %>
+							      <%= hidden_field_tag :fixture, fixture %>
+							      
+							      <div class="form-group">
+											<%= f.label :expected_return_at, '返却期限：' %>
+											<%= f.text_field :expected_return_at, class: 'form-control', placeholder: "2019-04-15" %>
+							      </div>
+							      <div class="form-group">
+											<%= f.label :note, '備考' %>
+											<%= f.text_field :note, class: 'form-control', placeholder: "会議で使用します。等" %>
+							      </div>
+										<%= f.submit '借りる', class: 'btn btn-primary btn-block' %>
+									<% end %>
+									
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>

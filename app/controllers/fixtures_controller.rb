@@ -7,6 +7,7 @@ class FixturesController < ApplicationController
     @fixtures = @fixtures.page(params[:page]).per(20)
     
     @fixture = Fixture.new
+    @rental_history = RentalHistory.new
   end
 
   def create
