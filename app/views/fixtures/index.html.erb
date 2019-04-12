@@ -37,9 +37,10 @@
 	</div>
 	
 		<% if admin_logged_in? %>
-			<button type="button" class="btn btn-danger pull-right" id="bihinDeleteBtn" data-toggle="modal" data-target="#bihinDeleteModal">削除</button>
+			<%#= link_to '削除', fixtures_path, class: 'btn btn-danger pull-right' %>
+			<!--<button type="button" class="btn btn-danger pull-right" id="bihinDeleteBtn" data-toggle="modal" data-target="#bihinDeleteModal">削除</button>-->
+			<%#= link_to '削除', fixtures_path, remote: true, class: 'btn btn-danger pull-right', id: 'bihinDeleteBtn', data-toggle: "modal", data-target: '#bihinDeleteModal' %>
 			<%#= button_to "削除", {controller: 'bihins', action: 'result'}, {method: :get, class: "btn btn-danger pull-right",id: "bihinDeleteBtn",data-toggle: "modal",data-target: "#bihinDeleteModal"} %>
-			<button type="button" class="btn btn-default pull-right">編集</button>
 			<%#= button_to "編集", {controller: 'bihins', action: 'result'}, {method: :get, class: "btn btn-default pull-right"} %>
 			
 			<div class="modal fade" id="bihinDeleteModal" tabindex="-1">
@@ -62,7 +63,13 @@
 	<% end %>
 </div>
 
+<%= form_for @fixture, url: delete_all_fixtures_path, method: :post  do |f|%>
 
+		<% if admin_logged_in? %>
+			<%= f.submit '削除', class: 'btn btn-danger pull-right' %>
+			<button type="button" class="btn btn-default pull-right">編集</button>
+		<% end %>
+		
 <table class="table table-hover table-bordered">
 	<thead>
 		<tr>
@@ -88,7 +95,7 @@
 		<% end %>
 			<% if admin_logged_in? %>
 				<td>
-					<input id=<%= "checkboxNumber" + fixture.id.to_s %> type="checkbox">
+					<%= f.check_box :id, {multiple: true},fixture.id %>
 				</td>
 			<% end %>
 				<td>
@@ -170,5 +177,8 @@
 		<% end %>
 	</tbody>
 </table>
+
+<% end %>
+
 
 <%= paginate @fixtures %>

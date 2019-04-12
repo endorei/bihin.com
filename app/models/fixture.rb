@@ -1,6 +1,6 @@
 class Fixture < ApplicationRecord
   belongs_to :room
-  has_many :rental_histories
+  has_many :rental_histories, :dependent => :destroy
   
   def rent
     rental_histories.where(returned_at: nil).present?
